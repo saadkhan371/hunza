@@ -3,11 +3,19 @@ mvn package -DskipTests -X
 
 --
 
-docker login
+docker login --username saadkhan371
 
 --
 
-docker build -t hunza:1.0.0 .
+docker build -t docker.io/saadkhan371/hunza:1.0.0 .
+docker push docker.io/saadkhan371/hunza:1.0.0
+
+--
+cd kube/
+
+--
+
+kompose convert
 
 --
 
