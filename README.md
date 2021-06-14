@@ -3,7 +3,10 @@ mvn package -DskipTests -X
 
 --
 
-docker build -t hunza .
+docker login
+
+--
+docker build -t hunza:1.0.0 .
 
 --
 
