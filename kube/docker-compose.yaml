@@ -1,0 +1,44 @@
+version: "2"
+
+services:
+
+  mongo:
+    image: mongo:3.6.17-xenial
+    ports:
+      - "27017"
+    volumes:
+      - ./db/:/data/db
+    container_name: mongo-db
+    networks:
+      - lognet
+
+  activemq:
+    image: webcenter/activemq:5.14.3
+    ports:
+      - "61616"
+    environment:
+      - GET_HOSTS_FROM=dns
+    container_name: active-mq
+    networks:
+      - lognet
+
+  frontend:
+    image: saadkhan371/hunza:1.0.0
+    ports:
+      - "8081:8081"
+    environment:
+      - GET_HOSTS_FROM=dns
+    container_name: java-api
+    depends_on:
+      - activemq
+      - mongo
+    networks:
+      - lognet
+    labels:
+      kompose.service.type: LoadBalancer
+
+
+
+networks:
+  lognet:
+    driver: bridge

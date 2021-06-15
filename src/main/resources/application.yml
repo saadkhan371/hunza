@@ -7,11 +7,11 @@ pagesize: 10
 
 spring:
   activemq:
-    broker-url: tcp://localhost:61616
+    broker-url: tcp://active-mq:61616
     user: admin
     password: admin
   data:
     mongodb:
-      host: localhost
+      host: mongo-db
       port: 27017
       database: Caterer
